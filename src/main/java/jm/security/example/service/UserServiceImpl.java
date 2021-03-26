@@ -1,0 +1,65 @@
+package jm.security.example.service;
+
+import jm.security.example.dao.UserDao;
+import jm.security.example.model.Role;
+import jm.security.example.model.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@Service
+public class UserServiceImpl implements UserService{
+
+    private final UserDao userDao;
+
+    private final PasswordEncoder passwordEncoder;
+
+    public UserServiceImpl(UserDao userDao, PasswordEncoder passwordEncoder) {
+        this.userDao = userDao;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @Override
+    @Transactional
+    public List<User> listUser() {
+        return userDao.listUser();
+    }
+
+    @Override
+    @Transactional
+    public void addUser(User user) {
+        userDao.addUser(user);
+    }
+
+    @Override
+    @Transactional
+    public void editUser(User user) {
+        userDao.editUser(user);
+    }
+
+    @Override
+    @Transactional
+    public void removeUser(Long id) {
+        userDao.removeUser(id);
+    }
+
+    @Override
+    @Transactional
+    public User getUserById(Long id) {
+        return userDao.getUserById(id);
+    }
+
+    @Override
+    @Transactional
+    public User getUserByName(String name) {
+        return userDao.getUserByName(name);
+    }
+
+    @Override
+    @Transactional
+    public Role getRoleByName(String role) {
+        return userDao.getRoleByName(role);
+    }
+}
