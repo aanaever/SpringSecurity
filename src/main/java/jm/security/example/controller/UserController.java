@@ -1,27 +1,33 @@
 package jm.security.example.controller;
 
+import jm.security.example.model.User;
+import jm.security.example.service.RoleService;
 import jm.security.example.service.UserService;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.security.Principal;
 
 
 @Controller
 @RequestMapping()
 public class UserController {
     private final UserService userService;
+    private final RoleService roleService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping(value = "/user")
-    public String getUserPage(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("user", userService.getUserByName(authentication.getName()));
+    public String getUserPage(Principal principal, Model model) {
+        String name = principal.getName();
+        User user = userService.getUserByName(name);
+        model.addAttribute("user", user);
+        model.addAttribute("role", user.getRoles());
         return "user";
     }
 }

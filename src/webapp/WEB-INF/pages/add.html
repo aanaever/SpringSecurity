@@ -6,22 +6,32 @@
 </head>
 <body>
 <div align="center">
-    <h3><a th:href="@{/admin/users}">Back to Users List</a></h3>
-    <br>
-   <form method="POST" th:action="@{/admin/users/add}" th:object="${user}" >
-        <label for="name">Name</label><br>
-        <input type="text" name="name" id="name" placeholder="Name" th:field="*{name}"/><br>
-        <label for="name">Last Name</label><br>
-        <input type="text" name="lastName" id="lastName"  placeholder="Last Name"><br>
-        <label for="name">Age</label><br>
-        <input type="text" name="age" id="age"  placeholder="Age"><br>
-        <label for="name">Password</label><br>
-        <input type="text" name="password" id="password" placeholder="Password"><br><br>
-       <input type="submit" value="Add">
+    <h2>Add User</h2>
+    <form method="POST" th:action="@{/admin/users/add}" th:object="${user}" >
+
+        <label for="name"> Name </label><br>
+        <input type="text" name="name" id="name"  placeholder="Name" th:field="*{name}"/><br>
+
+        <label for="name"> Last name </label><br>
+        <input type="text" name="lastName" id="lastName"  placeholder="Last name"><br>
+
+        <label for="name"> Age </label><br>
+        <input type="number" name="age" id="age"  placeholder="Age"><br>
+
+        <label for="name"> Password </label><br>
+        <input type="text" name="password" id="password"  placeholder="Password"><br>
+        <br>
+
+        <label><input type="checkbox" name="roles" th:each="role : ${roles}" th:text="${role.role}" th:value="${role.role}"/> </label><br>
+        <br>
+        <input type = "submit" value = "Add">
     </form>
     <br>
+    <form action="/logout">
+        <input type="submit" value="LOGOUT"/>
+    </form><br>
+
     <h3><a th:href="@{/admin/users}">Back to Users List</a></h3>
 </div>
-
 </body>
 </html>

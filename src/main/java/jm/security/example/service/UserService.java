@@ -19,4 +19,5 @@ public interface UserService {
     public User getUserByName(String name);
 
     public Role getRoleByName(String role);
+
 }

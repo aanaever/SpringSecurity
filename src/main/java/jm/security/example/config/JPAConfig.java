@@ -20,11 +20,11 @@ import java.util.Properties;
 @ComponentScan("jm.security.example")
 @EnableTransactionManagement
 @PropertySource("classpath:db.properties")
-public class AppConfig {
+public class JPAConfig {
 
     private final Environment env;
 
-    public AppConfig(Environment env) {
+    public JPAConfig(Environment env) {
         this.env = env;
     }
 

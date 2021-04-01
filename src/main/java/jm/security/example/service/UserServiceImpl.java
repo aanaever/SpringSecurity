@@ -7,13 +7,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import java.util.List;
 
+
 @Service
+@Transactional
 public class UserServiceImpl implements UserService{
 
     private final UserDao userDao;
-
     private final PasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserDao userDao, PasswordEncoder passwordEncoder) {
@@ -30,13 +32,14 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public void addUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDao.addUser(user);
     }
 
     @Override
     @Transactional
-    public void editUser(User user) {
-        userDao.editUser(user);
+    public void editUser(User userEdit) {
+        userDao.editUser(userEdit);
     }
 
     @Override

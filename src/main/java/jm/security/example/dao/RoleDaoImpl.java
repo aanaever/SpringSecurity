@@ -1,6 +1,7 @@
 package jm.security.example.dao;
 
 import jm.security.example.model.Role;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,8 +11,8 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-@Transactional
 public class RoleDaoImpl implements RoleDao {
+
     @PersistenceContext
     private EntityManager em;
 
@@ -26,13 +27,13 @@ public class RoleDaoImpl implements RoleDao {
     }
 
     @Override
-    public void editRole(Role role) {
-        em.merge(role);
+    public void editRole(Role roleEdit) {
+        em.merge(roleEdit);
     }
 
     @Override
-    public void removeRole(Long id) {
-        em.remove(em.find(Role.class, id));
+    public void removeRole(Role role) {
+        em.remove(role);
     }
 
     @Override

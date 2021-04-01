@@ -6,9 +6,12 @@
 </head>
 <body>
 <div align="center">
-    <h1>Hello, User!</h1>
+    <h1>Hello,User!</h1>
     <h1> Your Information </h1>
     <br>
+
+
+
     <table border="3">
         <tr>
             <th>Id</th>
@@ -16,16 +19,21 @@
             <th>Last Name</th>
             <th>Age</th>
             <th>Password</th>
+            <th>Role</th>
         </tr>
-        <tr>
+        <tr  th:each="role : ${role}">
             <td><p th:text="${user.id}">ID</p></td>
             <td><p th:text="${user.name}">Name</p></td>
             <td><p th:text="${user.lastName}">Last name</p></td>
             <td><p th:text="${user.age}">Age</p></td>
             <td><p th:text="${user.password}">Password</p></td>
+            <td><p th:text="${role.role}"></p></td>
         </tr>
     </table>
-    <h2><a th:href="@{/logout}"> Logout </a> </h2>
+    <br>
+    <form action="/logout">
+        <input type="submit" value="LOGOUT"/>
+    </form><br>
 </div>
 </body>
 </html>

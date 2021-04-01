@@ -1,6 +1,7 @@
-package jm.security.example.service;
+package jm.security.example.security;
 
 import jm.security.example.dao.UserDao;
+import jm.security.example.model.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+
     private final UserDao userDao;
 
     public UserDetailsServiceImpl(UserDao userDao) {
@@ -20,7 +22,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     // Для создания UserDetails используется интерфейс UserDetailsService, с единственным методом:
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return userDao.getUserByName(s);
+    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+        User user = userDao.getUserByName(name);
+        return user;
     }
 }

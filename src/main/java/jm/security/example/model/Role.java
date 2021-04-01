@@ -18,7 +18,6 @@ public class Role implements GrantedAuthority {
     @Column(name = "role")
     private String role;
 
-
     @Transient
     @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
     private Set<User> users;
@@ -26,7 +25,16 @@ public class Role implements GrantedAuthority {
     public Role() {
     }
 
-    public Role(String role, Set<User> users) {
+    public Role(String role) {
+        this.role = role;
+    }
+
+    public Role(Long id, String role) {
+        this.id = id;
+        this.role = role;
+    }
+
+        public Role(String role, Set<User> users) {
         this.role = role;
         this.users = users;
     }
@@ -56,11 +64,7 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", role='" + role + '\'' +
-                ", users=" + users +
-                '}';
+        return  role;
     }
 
     @Override
